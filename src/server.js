@@ -4,12 +4,34 @@ const PORT = 4500;
 
 const app = express();
 
-app.get("/", (req, res) => {
-    return res.send("I still love you");
-});
+const urlLogger = (req, res, next) =>{
+    console.log(`Path: ${req.method} ${req.path}`);
+    next();
+}
 
-app.get("/login", (req, res) =>{
-    return res.send("login here");
+const timeLogger = (req,res,next) =>{
+    const date = new Date();
+    console.log(`Time: ${date.getFullYear()}. ${date.getMonth()}. ${date.getDay()}`);
+    next();
+}
+
+const securityLogger = (req, res, next) =>{
+    const proto = req.protocol; 
+    if(proto === "https"){
+        console.log("secure");
+    }
+    console.log("insecure");
+    next();
+}
+
+const protectorMiddleware = (req, res) =>{
+    return res.end();
+}
+
+app.use(urlLogger, timeLogger, securityLogger);
+app.use('/protected', protectorMiddleware);
+app.get("/", 
+    (req, res) => { return res.send("<h1>Hello</h1>");
 });
 
 const habdleListening = () => 

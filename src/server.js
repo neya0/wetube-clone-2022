@@ -1,38 +1,21 @@
 import express from "express";
+import morgan from "morgan";
+import globalRouter from "./routers/globalRouter";
+import userRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
 
 const PORT = 4500;
 
 const app = express();
+const middlewareLogger = morgan("dev"); 
 
-const urlLogger = (req, res, next) =>{
-    console.log(`Path: ${req.method} ${req.path}`);
-    next();
-}
+app.set("view engine", "pug");
+app.set("views", process.cwd() + "/src/views");
+app.use(middlewareLogger);
 
-const timeLogger = (req,res,next) =>{
-    const date = new Date();
-    console.log(`Time: ${date.getFullYear()}. ${date.getMonth()}. ${date.getDay()}`);
-    next();
-}
-
-const securityLogger = (req, res, next) =>{
-    const proto = req.protocol; 
-    if(proto === "https"){
-        console.log("secure");
-    }
-    console.log("insecure");
-    next();
-}
-
-const protectorMiddleware = (req, res) =>{
-    return res.end();
-}
-
-app.use(urlLogger, timeLogger, securityLogger);
-app.use('/protected', protectorMiddleware);
-app.get("/", 
-    (req, res) => { return res.send("<h1>Hello</h1>");
-});
+app.use("/", globalRouter);
+app.use("/users", userRouter);
+app.use("/videos", videoRouter);
 
 const habdleListening = () => 
     console.log(`Server listening on port http://localhost:${PORT}`);

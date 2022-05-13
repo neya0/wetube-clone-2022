@@ -2,4 +2,7 @@
 extends base.pug
 
 block content
-    h2 Upload Video Page
+    h3 Hello. Let's Upload Video!!
+    form(method="POST")
+        input(name="tie", placeholder="What is Video Name?", value=videos.title, required,)
+        input(type="submit", value="save")

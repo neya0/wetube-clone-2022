@@ -2,7 +2,12 @@
 extends base.pug
 
 block content
-    h3 Hello. Let's Upload Video!!
+    if errorMessage
+        h3=errorMessage
+    else
+        h3 Hello. Let's Upload Video!!
     form(method="POST")
-        input(name="tie", placeholder="What is Video Name?", value=videos.title, required,)
+        input(name="title", placeholder="What is Video Name?", required, type="text", maxlength=80)
+        input(name="description", placeholder="Description", required, type="text", minlength=20)
+        input(name="hashtags", placeholder="Hashtags", required, type="text")
         input(type="submit", value="save")

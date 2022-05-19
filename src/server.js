@@ -1,12 +1,8 @@
-import "./db";
-import "./models/Video";
 import express from "express";
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
-
-const PORT = 4500;
 
 const app = express();
 const middlewareLogger = morgan("dev"); 
@@ -20,7 +16,4 @@ app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
-const habdleListening = () => 
-    console.log(`✅ Server listening on port http://localhost:${PORT}`);
-
-app.listen(PORT, habdleListening);
+export default app;

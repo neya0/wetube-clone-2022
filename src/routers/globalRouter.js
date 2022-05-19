@@ -1,10 +1,10 @@
 import express from "express";
-import { homepage, search } from "../controllers/videoController";
+import { home, search } from "../controllers/videoController";
 import { joinPage, login } from "../controllers/userController";
 
 const globalRouter = express.Router();
 
-globalRouter.get("/",homepage);
+globalRouter.get("/",home);
 globalRouter.get("/join", joinPage);
 globalRouter.get("/login", login);
 globalRouter.get("/search", search);

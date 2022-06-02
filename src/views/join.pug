@@ -2,4 +2,16 @@
 extends base.pug
 
 block content
-    h2 Join Page
+    h4=errorMessage
+    form(method="POST")
+        input(name="name", type="text", placeholder="What's your name?", required)
+        input(name="username", type="text", placeholder="What's your username?", required)
+        input(name="email", type="email", placeholder="What's your email?", required)
+        input(name="password", type="password", placeholder="What's your password?", required)
+        input(name="password2", type="password", placeholder="Check your password.", required)
+        input(name="address", type="text", placeholder="What's your address?")
+        input(type="submit", value="Create Account")
+    hr
+    div 
+        span Are you already have an Account?   
+        a(href="/login") Login &rarr;

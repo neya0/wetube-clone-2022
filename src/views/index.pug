@@ -1,0 +1,12 @@
+<DOCTYPE html>
+html
+  head
+    title #{pageTitle} | Wetube
+    link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+  body
+    h1 TEXT to HTML
+    form(method="POST", enctype="multipart/form-data", action=`/read`)
+        input(name="text", type="file", accept="text/txt")
+        input(type="submit", value="convert")
+
+    

@@ -1,5 +1,12 @@
-
-extends base.pug
+extends base
 
 block content
-    h2 Login Page
+    h4=errorMessage
+    form(method="POST")
+        input(name="username", type="text", placeholder="What's your username?", required)
+        input(name="password", type="password", placeholder="What's your password?", required)
+        input(type="submit", value="Login")
+    hr
+    div 
+        span Don't you have an Account?   
+        a(href="/join") Create Account &rarr;

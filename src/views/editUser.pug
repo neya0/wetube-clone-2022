@@ -2,4 +2,9 @@
 extends base.pug
 
 block content
-    h2 Edit User Page
+    form(method="POST")
+        input(name="name", type="text", value=loggedInUser.name)
+        input(name="username", type="text", value=loggedInUser.username)
+        input(name="email", type="text", value=loggedInUser.email)
+        input(name="address", type="text", value=loggedInUser.address)
+        input(type="submit", value="Edit Profile")

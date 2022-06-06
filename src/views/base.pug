@@ -12,9 +12,11 @@ html(lang="ko")
                     a(href="/") Home
                 if loggedIn 
                     li
-                        a(href="/") Log Out
+                        a(href="/users/edit") Edit Profile
                     li
-                        a(href="/profil") #{loggedInUser.name}
+                        a(href="/users/logout") Log Out
+                    //li
+                        a(href="/profil") #{loggedInUser.username}
                 else
                     li 
                         a(href="/join") Join

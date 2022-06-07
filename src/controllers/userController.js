@@ -27,6 +27,7 @@ export const postJoin = async (req, res) => {
             name,
             username,
             email,
+            socialOnly: false,
             password,
             address,
         });
@@ -131,24 +132,72 @@ export const logout = (req, res) => {
     return res.redirect("/");
 };
 export const getEdit = (req, res) => {
-    return res.render("editUser", {pageTitle: "Edit User"});
+    return res.render("user/editUser", {pageTitle: "Edit User"});
 };
-
 export const postEdit = async (req, res) => {
-    const { name, username, email, address } = req.body;
-    const user = await User.find({ username });
-    try{
-        User.updateOne({
-            name,
-            username,
-            address,
-            email,
-        });
-        return res.render("editUser", {pageTitle: "Edit User"});
-    }catch{}
+    const { 
+        session: { user: { _id } }, 
+        body: { name, username, email, address, avatar } 
+    } = req;
+    console.log(avatar);
+    const data = [];
+    if(username !== req.session.user.username){
+        data.push({username});
+    }
+    if(email !== req.session.user.email){
+        data.push({email});
+    }
+    if(data.length > 0){
+        const existsUser = await User.findOne({$or: data});
+        if(existsUser && existsUser._id.toString() !== _id){
+            return res.status(400).render("user/editUser", {
+                pageTitle: "Edit User",
+                errorMessage: "That username/email is already exists",
+            });
+        }
+    }
+    const updateUser = await User.findByIdAndUpdate(_id, {
+        
+        name,
+        username,
+        email,
+        address,
+     },{new: true});
+     req.session.user = updateUser;
+     return res.redirect("/users/edit");
 };
+export const getChangePassword = (req, res) =>{
+    if(req.session.user.socialOnly === true){
+        return res.redirect("/");
+    }
+    return res.render("user/changePassword", {pageTitle: "Change Password"});
+}
+export const postChangePassword = async (req, res) =>{
+    const {
+        session: {user: {_id}},
+        body: {oldPassword, newPassword, newPasswordCon}
+    } = req;
+    const user = await User.findById(_id);
+    const comparePassword = await bcrypt.compare(oldPassword, user.password);
+    if(!comparePassword){
+        return res.status(400).render("user/changePassword", {
+            pageTitle: "Change Password",
+            errorMessage: "Please check your password."});
+    }
+    if(oldPassword === newPassword){
+        return res.status(400).render("user/changePassword", {
+            pageTitle: "Change Password",
+            errorMessage: "Same Password. Please cange your password."});
+    }
+    if(newPassword !== newPasswordCon){
+        return res.status(400).render("user/changePassword", {
+            pageTitle: "Change Password",
+            errorMessage: "Please check your new password."});  
+    }
+    user.password = newPassword;
+    await user.save();
+    return res.redirect("logout");
+}
 
-
-export const remove = (req, res) => res.render("delete-user", {pageTitle: "Delete User"});
 export const see = (req, res) => res.render("see-user", {pageTitle: "See User"});
 

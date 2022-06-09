@@ -136,10 +136,10 @@ export const getEdit = (req, res) => {
 };
 export const postEdit = async (req, res) => {
     const { 
-        session: { user: { _id } }, 
-        body: { name, username, email, address, avatar } 
+        session: { user: { _id, avatarUrl } }, 
+        body: { name, username, email, address },
+        file
     } = req;
-    console.log(avatar);
     const data = [];
     if(username !== req.session.user.username){
         data.push({username});
@@ -157,14 +157,15 @@ export const postEdit = async (req, res) => {
         }
     }
     const updateUser = await User.findByIdAndUpdate(_id, {
-        
+        avatarUrl: file ? file.path : avatarUrl,
         name,
         username,
         email,
         address,
      },{new: true});
+     console.log(updateUser);
      req.session.user = updateUser;
-     return res.redirect("/users/edit");
+     return res.redirect("/");
 };
 export const getChangePassword = (req, res) =>{
     if(req.session.user.socialOnly === true){
@@ -198,6 +199,12 @@ export const postChangePassword = async (req, res) =>{
     await user.save();
     return res.redirect("logout");
 }
-
-export const see = (req, res) => res.render("see-user", {pageTitle: "See User"});
+export const seeProfile = async(req, res) =>{
+    const {id} = req.params;
+    const user = await User.findById(id);
+    if(!user){
+        return res.status(404).render("404", {pageTitle: "404"});
+    }
+    return res.render("user/seeProfile", {pageTitle: `${user.username} Profile`, user});
+}
 

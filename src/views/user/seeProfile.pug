@@ -1,0 +1,14 @@
+
+extends ../base
+
+block content
+    img(src="/" + user.avatarUrl, width=100, height=100)
+    ul
+        li
+            span
+                h4 Username
+                p=user.name 
+        li
+            span 
+                h4 Email 
+                p=user.email 

@@ -1,5 +1,6 @@
 mixin video(video)
     div
+        video(src=`/${video.videoUrl}`, width=300, height=180, controls)
         h4
             a(href=`/videos/${video.id}`)=video.title
         p=video.description

@@ -1,14 +1,21 @@
 
 extends ../base
+include ../mixins/video
 
 block content
     img(src="/" + user.avatarUrl, width=100, height=100)
-    ul
-        li
-            span
-                h4 Username
-                p=user.name 
-        li
-            span 
-                h4 Email 
-                p=user.email 
+    div
+        ul
+            li
+                span
+                    h4 Username
+                    p=user.name 
+            li
+                span 
+                    h4 Email 
+                    p=user.email 
+    div 
+        each video in user.videos
+            +video(video)
+        else
+            li Sorry nothing found.

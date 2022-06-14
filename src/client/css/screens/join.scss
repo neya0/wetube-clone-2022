@@ -1,0 +1,62 @@
+.join-container{
+    width: 100%;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+.join-form{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    label{
+        margin-bottom: 12px;
+        font-size: 18px;
+    }
+    input{
+        margin-bottom: 30px;
+        line-height: 35px;
+        background-color: #313131;
+        border: none;
+        color: white;
+        font-size: 15px;
+        &::placeholder{
+            padding: 5px;
+            opacity: 0.5;
+        }
+        &:focus{
+            outline: none;
+            border-bottom: $border-bottom;
+        }
+        &:last-child{
+            width: 180px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: $logo;
+            color: white;
+            position: absolute;
+            bottom: -100px;
+            right: 0px;
+            &:hover{
+                cursor: pointer;
+            }
+            &:active{
+                border-bottom: none;
+                background-color: #313131;
+                color: $logo;
+            }
+        }
+    }
+}
+.move-to-login{
+    margin: 120px;
+    display: flex;
+    justify-content: center;
+    opacity: 0.7;
+    span{
+        margin-right: 5px;
+    }
+    a{
+        text-decoration: underline;
+    }
+}

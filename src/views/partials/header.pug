@@ -1,0 +1,26 @@
+header.header
+    div.header-container.logo
+        a(href="/")
+            i.fab.fa-youtube.logo__icon
+            span.logo__text WETUBE
+    div.header-container
+        form(method="GET").search-form
+            input(type="text", name="search", placeholder="Search")
+            button
+                i.fab.fa-magnifying-glass.fa-solid
+    nav.header-container
+        ul 
+            if loggedIn 
+                li
+                    a(href="/users/edit") Edit Profile
+                li
+                    a(href="/users/logout") Log Out
+                li
+                    a(href=`/users/${loggedInUser._id}`) #{loggedInUser.username}
+                li 
+                    a(href="/videos/upload") Upload Video
+            else
+                li 
+                    a(href="/join") Join
+                li 
+                    a(href="/login") Login

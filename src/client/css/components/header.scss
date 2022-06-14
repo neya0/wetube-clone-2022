@@ -1,0 +1,68 @@
+.header{
+    width: 100vw;
+    box-sizing: border-box;
+    background-color: #202020;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-container{
+    width: 33%;
+}
+.logo{
+    a{
+        display: flex;
+        align-items: center;
+    }
+}
+.logo__icon{
+    color: red;
+    font-size: 30px;
+    margin-right: 10px; 
+}
+.logo__text{
+    font-size: 20px;
+    font-weight: 600;
+}
+.search-form{
+    position: relative;
+    input{
+        padding: 0px 5px;
+        width: 90.5%;
+        background-color: $bg;
+        border: #313131 solid 1px;
+        font-size: 16px;
+        line-height: 32px;
+        color: white;
+        &:focus{
+            outline: none;
+            border: #1a62b9 solid 1px;
+        }
+    }
+    button{
+        height: 34px;
+        width: 40px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-color: #313131;
+        border: none;
+        font-size: 16px;
+        i{
+            color: white;
+        }
+    }
+}
+nav{
+    width: 33%;
+    ul{
+        display: flex;
+        justify-content: end;
+        text-align: right;
+        li{
+            font-size: 15px;
+            margin-left: 10px;
+        }
+    }
+}

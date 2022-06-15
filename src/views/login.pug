@@ -2,13 +2,14 @@ extends base
 
 block content
     h4=errorMessage
-    form(method="POST")
+    form(method="POST").login-form
         input(name="username", type="text", placeholder="What's your username?", required)
         input(name="password", type="password", placeholder="What's your password?", required)
         input(type="submit", value="Login")
-        br
+    div.onother__login
+        hr
         a(href="/users/github/start") Continue with Github &rarr;
-    hr
-    div 
+    br
+    div.go__to__join
         span Don't you have an Account?   
         a(href="/join") Create Account &rarr;

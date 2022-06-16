@@ -3,19 +3,21 @@ extends ../base
 include ../mixins/video
 
 block content
-    img(src="/" + user.avatarUrl, width=100, height=100)
-    div
-        ul
-            li
-                span
-                    h4 Username
-                    p=user.name 
-            li
-                span 
-                    h4 Email 
+    div.user-profile
+        div.user-profile__column
+            img(src="/" + user.avatarUrl, width=100, height=100).user-img
+            ul.user-info
+                li
+                    p=user.username 
+                li
                     p=user.email 
-    div 
+        div.user-profile__column
+            div.go-to-user__edit
+                a(href="edit") Edit Profile
+    div.user-video
+        span Your Video
+        hr
         each video in user.videos
             +video(video)
         else
-            li Sorry nothing found.
+            li.video-list__else Sorry nothing found.

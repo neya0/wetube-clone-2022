@@ -5,7 +5,7 @@ block content
     if errorMessage
         h3=errorMessage
     else
-    form(method="POST" enctype="multipart/form-data")
+    form(method="POST" enctype="multipart/form-data").upload-form
         input(name="uploadVideo", required, type="file", accept="video/*")
         input(name="title", placeholder="What is Video Name?", required, type="text", maxlength=80)
         input(name="description", placeholder="Description", required, type="text", minlength=20)

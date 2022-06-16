@@ -60,9 +60,23 @@ nav{
         display: flex;
         justify-content: end;
         text-align: right;
+        align-items: center;
         li{
             font-size: 15px;
             margin-left: 10px;
+            div{
+                width: 18px;
+                height: 18px;
+                border: white solid 2px;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                i{
+                    width: 15px;
+                    font-size: 25px;
+                }
+            }
         }
     }
 }

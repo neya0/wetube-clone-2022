@@ -3,14 +3,16 @@ extends ../base.pug
 
 block content
     h4=errorMessage
-    img(src=`/${loggedInUser.avatarUrl}`, width=100, height=100)
-    form(method="POST", enctype="multipart/form-data")
-        input(name="avartar", type="file", accept="image/*")
-        input(name="name", type="text", value=loggedInUser.name)
-        input(name="username", type="text", value=loggedInUser.username)
-        input(name="email", type="text", value=loggedInUser.email)
-        input(name="address", type="text", value=loggedInUser.address)
-        input(type="submit", value="Edit Profile")
-    if !loggedInUser.socialOnly
-        hr
-        a(href="change-password") Change Password &rarr;
+    div.user-edit
+        img(src=`/${loggedInUser.avatarUrl}`, width=100, height=100).user-img__big
+        form(method="POST", enctype="multipart/form-data").user-edit__form
+            input(name="avartar", type="file", accept="image/*")
+            input(name="name", type="text", value=loggedInUser.name)
+            input(name="username", type="text", value=loggedInUser.username)
+            input(name="email", type="text", value=loggedInUser.email)
+            input(name="address", type="text", value=loggedInUser.address)
+            input(type="submit", value="Edit Profile")
+    div
+        if !loggedInUser.socialOnly
+            hr
+            a(href="change-password") Change Password &rarr;

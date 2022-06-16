@@ -11,14 +11,14 @@ header.header
     nav.header-container
         ul 
             if loggedIn 
-                li
-                    a(href="/users/edit") Edit Profile
-                li
-                    a(href="/users/logout") Log Out
+                li 
+                    a(href="/videos/upload")
+                        div
+                            i.fab.fa-plus
                 li
                     a(href=`/users/${loggedInUser._id}`) #{loggedInUser.username}
-                li 
-                    a(href="/videos/upload") Upload Video
+                li
+                    a(href="/users/logout") Log Out
             else
                 li 
                     a(href="/join") Join
